@@ -1,0 +1,24 @@
+{
+  "name": "product_management",
+  "version": "1.0.0",
+  "description": "Node JS Assigment - Product Management",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/api.js"
+  },
+  "author": "Yogesh Kanda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "delay": 500,
+    "env": {
+      "PORT": 4000
+    }
+  }
+}

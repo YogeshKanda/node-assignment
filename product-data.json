@@ -1,0 +1,42 @@
+[
+    {
+        "productId": 2,
+        "productName": "Hanner",
+        "productCode": "THX-0848",
+        "releaseDate": "May 21 2015",
+        "description": "Curved claw steel hammer",
+        "price": 8.9,
+        "starRating": 4.8,
+        "imageurl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+    },
+    {
+        "productId": 3,
+        "productName": "Saw",
+        "productCode": "TBX-0022",
+        "releaseDate": "May 15, 2016",
+        "description": "15-inch steel blade hand saw",
+        "price": 11.55,
+        "starRating": 3.7,
+        "imageUrl": "http://openclipart.org/image/300px/svg_to_pog/27e7e/egore911_saw.png"
+    },
+    {
+        "productId": 4,
+        "productName": "Video Game Controller",
+        "productCode": "GMG-0042",
+        "releaseDate": "October 15, 2015",
+        "description": "Standard two-button video game controller",
+        "price": 35.95,
+        "starrating": 4.6,
+        "imageUrl": "http://openclipart.org/image/100px/svg_to_png/128337/xbox-controller_81.png"
+    },
+    {
+        "productId": 5,
+        "productName": "Dell XPS Laptop",
+        "productCode": "xps-2234",
+        "releaseDate": "November 15 2017",
+        "description": "new product from dell",
+        "price": "1299",
+        "starRating": 1,
+        "ImageUrl": "http://i.dell.com/sites/imagecontent/products/PublishingImages/xpa-15-9560-Laptop/laptop-xps-15-pdp-polaris-02.jpg"
+    }
+]
