@@ -1,5 +1,15 @@
 [
     {
+        "productId": 1,
+        "productName": "Garden Cart",
+        "productCode": "GDN-0023",
+        "releaseDate": "March 18, 2016",
+        "description": "15 gallon capacity rolling garden cart",
+        "price": 32.99,
+        "starRating": 5,
+        "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+    },
+    {
         "productId": 2,
         "productName": "Hanner",
         "productCode": "THX-0848",
@@ -38,5 +48,15 @@
         "price": "1299",
         "starRating": 1,
         "ImageUrl": "http://i.dell.com/sites/imagecontent/products/PublishingImages/xpa-15-9560-Laptop/laptop-xps-15-pdp-polaris-02.jpg"
+    },
+    {
+        "productId": 6,
+        "productName": "Garden Cart 6",
+        "productCode": "GDN-0023",
+        "releaseDate": "March 18, 2016",
+        "description": "15 gallon capacity rolling garden cart",
+        "price": 32.99,
+        "starRating": 5,
+        "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
     }
 ]

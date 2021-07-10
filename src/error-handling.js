@@ -19,3 +19,36 @@
  * TODO: File handling errors
  * TODO: Prevent server crash/error handle them
  */
+
+function checkIfIdisANumber(id) {
+    let parsed_id = parseInt(id);
+    if (parsed_id === NaN) {
+        return {
+            "statusCode": 400,
+            "status": "failure",
+            "message": "Product not found",
+            "data": []
+        }
+    }
+    return parsed_id;
+}
+
+function checkIfProductExists(product_details) {
+    if (product_details) {
+        return {
+            "statusCode": 200,
+            "status": "success",
+            "message": "Product data found",
+            "data": product_details
+        }
+    } else {
+        return {
+            "statusCode": 400,
+            "status": "failure",
+            "message": "Product not found",
+            "data": []
+        }
+    }
+}
+
+module.exports = { checkIfIdisANumber, checkIfProductExists };
