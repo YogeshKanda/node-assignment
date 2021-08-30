@@ -1,6 +1,6 @@
 const path = require('path');
 const helpers = require('./helpers.js');
-const error_handler = require('./error-handling.js');
+const error_handler = require('../error-handling.js');
 
 const file_path = path.join(__dirname, '../product-data.json');
 

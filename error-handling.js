@@ -51,4 +51,16 @@ function checkIfProductExists(product_details) {
     }
 }
 
-module.exports = { checkIfIdisANumber, checkIfProductExists };
+function server_error(err, req, res, next) {
+    if (!err.statusCode) {
+        err = {
+            statusCode: 500,
+            status: "failure",
+            message: "There is some issue at server side. Please check the log."
+        }
+    }
+    console.error(err.message); // Log error message in our server's console
+    res.status(err.statusCode).send(err); // All HTTP requests must have a response, so let's send back an error with its status code and message
+}
+
+module.exports = { checkIfIdisANumber, checkIfProductExists, server_error };
