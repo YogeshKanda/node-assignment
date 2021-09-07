@@ -1,29 +1,22 @@
-var express = require('express')
-var router = express.Router()
+const path = require('path');
 const data_handler = require('../model/data-access.js');
 
-// middleware that is specific to this router
-// router.use(function timeLog(req, res, next) {
-//     console.log('Time: ', Date.now())
-//     next()
-// })
+const file_path = path.join(__dirname, '../product-data.json');
 
-router.get('/all', (req, res) => {
-    data_handler.getAllProducts()
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(400).send(err))
-});
+function getAllProducts() {
+    return data_handler.readDataFromFile(file_path);
+}
 
-router.get('/:id(\d+)', (req, res, next) => {
-    data_handler.getAProduct(parseInt(req.params.id))
-        .then(data => res.status(200).send(data))
-        .catch(next)
-});
+function getAProduct() {
+    return data_handler.readDataFromFile(file_path)
+        .then((all_products) => {
+            expected_product = all_products.find(product => product.productId === id);
+            return error_handler.checkIfProductExists(expected_product);
+        })
+        .catch((err) => {
+            //TODO: Use error handling here
+            return err;
+        })
+}
 
-router.get('*', (req, res, next) => {
-    let err = new Error("Page Not Found")
-    err.statusCode = 404
-    next(err)
-});
-
-module.exports = router;
+module.exports = { getAProduct, getAllProducts };

@@ -1,19 +1,24 @@
-var express = require('express')
-var router = express.Router()
+const path = require('path');
 const data_handler = require('../model/data-access.js');
 
-router.put('/:id()\d+', (req, res) => {
-    let id = parseInt(req.params.id);
+const file_path = path.join(__dirname, '../product-data.json');
 
-    data_handler.updateAProduct(id, req.body)
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(500).send(err))
-})
+function updateProduct(id, product_details) {
+    return data_handler.readDataFromFile(file_path)
+        .then((all_products) => {
+            let expected_product_index = all_products.findIndex(product => product.productId === id);
+            if (expected_product_index !== -1) {
+                all_products[expected_product_index] = product_details;
+                return data_handler.updateProductInFile(file_path, all_products);
+            } else {
+                //TODO: Use error handling here
+                return "Product Not Found"
+            }
+        })
+        .catch((err) => {
+            //TODO: Use error handling here
+            return err;
+        })
+}
 
-router.put('*', (req, res, next) => {
-    let err = new Error("Forbidden")
-    err.statusCode = 403
-    next(err)
-});
-
-module.exports = router;
+module.exports = { updateProduct };

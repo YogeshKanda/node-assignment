@@ -1,17 +1,24 @@
-var express = require('express')
-var router = express.Router()
+const path = require('path');
 const data_handler = require('../model/data-access.js');
 
-router.post('/', (req, res) => {
-    data_handler.addAProduct(req.body)
-        .then(data => res.status(200).send(data))
-        .catch(err => res.status(500).send(err))
-});
+const file_path = path.join(__dirname, '../product-data.json');
 
-router.post('*', (req, res, next) => {
-    let err = new Error("Forbidden")
-    err.statusCode = 403
-    next(err)
-});
+function addProduct(product_details) {
+    return data_handler.readDataFromFile(file_path)
+        .then((all_products) => {
+            let expected_product = all_products.find(product => product.productId === product_details.productId);
+            if (expected_product) {
+                return "Product Already exists"
+            } else {
+                //TODO: Use error handling here
+                all_products.push(product_details)
+                return data_handler.updateProductInFile(file_path, all_products);
+            }
+        })
+        .catch((err) => {
+            //TODO: Use error handling here
+            return err;
+        })
+}
 
-module.exports = router;
+module.exports = { addProduct };
