@@ -3,20 +3,50 @@ const data_handler = require('../model/data-access.js');
 
 const file_path = path.join(__dirname, '../product-data.json');
 
-function getAllProducts() {
-    return data_handler.readDataFromFile(file_path);
+const getAllProducts = async (req, res) => {
+    try {
+        let product_data = await data_handler.readDataFromFile(file_path);
+        res
+            .status(200)
+            .json({
+                "status": "success",
+                "message": "Product data found",
+                "data": product_data
+            })
+    }
+    catch (err) {
+        res
+            .status(404)
+            .json(err)
+    }
 }
 
-function getAProduct() {
-    return data_handler.readDataFromFile(file_path)
+const getProduct = async (req, res) => {
+    let id = parseInt(req.params.id);
+    data_handler.readDataFromFile(file_path)
         .then((all_products) => {
             expected_product = all_products.find(product => product.productId === id);
-            return error_handler.checkIfProductExists(expected_product);
+            if (expected_product) {
+                res
+                    .status(200)
+                    .json({
+                        "status": "success",
+                        "message": "Product data found",
+                        "data": expected_product
+                    })
+            }
+            else {
+                res
+                    .status(404)
+                    .send("Product not found")
+            }
         })
         .catch((err) => {
-            //TODO: Use error handling here
-            return err;
+            res
+                .status(404)
+                .json(err)
         })
+
 }
 
-module.exports = { getAProduct, getAllProducts };
+module.exports = { getProduct, getAllProducts };

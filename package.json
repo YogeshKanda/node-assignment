@@ -4,7 +4,7 @@
   "description": "Node JS Assigment - Product Management",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon routes/api.js"
+    "start": "nodemon ./bin/www"
   },
   "author": "Yogesh Kanda",
   "license": "ISC",

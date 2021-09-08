@@ -11,6 +11,8 @@ router
     .post(add_product.addProduct)
 
 router
-    .route('/products/:id(\d+)')
-    .get(get_products.getAProduct)
+    .route('/products/:id')
+    .get(get_products.getProduct)
     .put(update_products.updateProduct)
+
+module.exports = router;
