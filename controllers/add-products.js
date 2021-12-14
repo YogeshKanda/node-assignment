@@ -3,21 +3,32 @@ const data_handler = require('../model/data-access.js');
 
 const file_path = path.join(__dirname, '../product-data.json');
 
-function addProduct(product_details) {
-    return data_handler.readDataFromFile(file_path)
+const addProduct = async (req, res) => {
+    let id = parseInt(req.params.id);
+    data_handler.readDataFromFile(file_path)
         .then((all_products) => {
-            let expected_product = all_products.find(product => product.productId === product_details.productId);
+            expected_product = all_products.find(product => product.productId === id);
             if (expected_product) {
-                return "Product Already exists"
-            } else {
-                //TODO: Use error handling here
+                res
+                    .status(404)
+                    .send("Product already exists")
+            }
+            else {
                 all_products.push(product_details)
-                return data_handler.updateProductInFile(file_path, all_products);
+                data_handler.updateProductInFile(file_path, all_products);
+                res
+                    .status(200)
+                    .json({
+                        "status": "success",
+                        "message": "Product added successfully",
+                        "data": all_products
+                    })
             }
         })
         .catch((err) => {
-            //TODO: Use error handling here
-            return err;
+            res
+                .status(404)
+                .json(err)
         })
 }
 
