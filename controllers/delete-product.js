@@ -3,25 +3,38 @@ const data_handler = require('../model/data-access.js');
 
 const file_path = path.join(__dirname, '../product-data.json');
 
-function deleteAProduct(id) {
-    return data_handler.readDataFromFile(file_path)
+const deleteAProduct = async (req, res) => {
+    let id = parseInt(req.params.id);
+    data_handler.readDataFromFile(file_path)
         .then((all_products) => {
-            let expected_product = all_products.find(product => product.productId === id);
+            expected_product = all_products.find(product => product.productId === id);
             if (expected_product) {
                 let updated_data = all_products.filter(product => product !== expected_product);
                 if (updated_data) {
-                    return data_handler.updateProductInFile(file_path, updated_data);
+                    data_handler.updateProductInFile(file_path, updated_data);
+                    res
+                        .status(200)
+                        .json({
+                            "status": "success",
+                            "message": "Product deleted",
+                            "data": updated_data
+                        })
                 } else {
-                    return "File could not be updated"
+                    res
+                        .status(404)
+                        .send("There was an error while deleting the product. Please try again later")
                 }
-            } else {
-                //TODO: Use error handling here
-                return "Product Not Found"
+            }
+            else {
+                res
+                    .status(404)
+                    .send("Product not found")
             }
         })
         .catch((err) => {
-            //TODO: Use error handling here
-            return err;
+            res
+                .status(404)
+                .json(err)
         })
 }
 
