@@ -46,7 +46,6 @@ const getProduct = async (req, res) => {
                 .status(404)
                 .json(err)
         })
-
 }
 
 module.exports = { getProduct, getAllProducts };

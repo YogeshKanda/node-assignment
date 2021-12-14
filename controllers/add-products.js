@@ -14,7 +14,7 @@ const addProduct = async (req, res) => {
                     .send("Product already exists")
             }
             else {
-                all_products.push(product_details)
+                all_products.push(req.body)
                 data_handler.updateProductInFile(file_path, all_products);
                 res
                     .status(200)
